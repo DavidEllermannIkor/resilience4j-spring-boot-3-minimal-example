@@ -8,16 +8,16 @@ import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 
 @Service
 public class BackendService {
-	
-  public BackendService(RestTemplate restTemplate) {
-		this.restTemplate = restTemplate;
-	}
 
-	private static final String ENDPOINT_AVAILABLE_PATH = "http://localhost:8080/test/available";
+  public BackendService(RestTemplate restTemplate) {
+    this.restTemplate = restTemplate;
+  }
+
+  private static final String ENDPOINT_AVAILABLE_PATH = "http://localhost:8080/test/available";
   private static final String ENDPOINT_NOT_AVAILABLE_PATH = "http://localhost:8080/test/not-available";
-  
+
   private final RestTemplate restTemplate;
-	
+
   @CircuitBreaker(name = "DEMO", fallbackMethod = "sendSecondary")
   public HttpStatusCode send() {
     return sendToEndpoint(ENDPOINT_NOT_AVAILABLE_PATH);
@@ -28,9 +28,9 @@ public class BackendService {
   private HttpStatusCode sendSecondary(Exception e) {
     return sendToEndpoint(ENDPOINT_AVAILABLE_PATH);
   }
-  
+
   private HttpStatusCode sendToEndpoint(String endpoint) {
-  	var responseResponseEntity = restTemplate.getForEntity(endpoint, Void.class);
-  	return responseResponseEntity.getStatusCode();
+    var responseResponseEntity = restTemplate.getForEntity(endpoint, Void.class);
+    return responseResponseEntity.getStatusCode();
   }
 }

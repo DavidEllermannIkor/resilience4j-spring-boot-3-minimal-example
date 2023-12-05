@@ -6,8 +6,9 @@ import org.springframework.web.client.RestTemplate;
 
 @Configuration
 public class DemoConfiguration {
-	@Bean
-	RestTemplate createRestTemplate() {
-		return new RestTemplate();
-	}
+
+  @Bean
+  RestTemplate createRestTemplate() {
+    return new RestTemplate();
+  }
 }

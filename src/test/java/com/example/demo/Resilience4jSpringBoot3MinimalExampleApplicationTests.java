@@ -14,14 +14,14 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 @AutoConfigureMockMvc
 @SpringBootTest(webEnvironment=WebEnvironment.DEFINED_PORT)
 class Resilience4jSpringBoot3MinimalExampleApplicationTests {
-	
+  
   @Autowired
   private MockMvc mvc;
 
-	@Test
-	void whenCalledEndpoint_WithCircuitBreaker_ThenSecondEndpointIsCalledAndOkReturned() throws Exception {
-		mvc.perform(MockMvcRequestBuilders.get("/test/start"))
-			.andExpect(status().isOk());
-	}
+  @Test
+  void whenCalledEndpoint_WithCircuitBreaker_ThenSecondEndpointIsCalledAndOkReturned() throws Exception {
+    mvc.perform(MockMvcRequestBuilders.get("/test/start"))
+      .andExpect(status().isOk());
+  }
 
 }
